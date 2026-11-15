@@ -11,7 +11,7 @@
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
   --page:#f7f4fb; --ink:#3b3550; --sub:#6d6785; --card:#ffffff; --shadow:rgba(80,60,120,.16);
-  --c1:#cfe3f7; --c2:#e0d6f5; --c3:#fbefb9; --c4:#d3e8d0; --c5:#fbd9c4; --c6:#f8d3e2;
+  --c1:#cfe3f7; --c2:#e0d6f5; --c3:#fbefb9; --c4:#d3e8d0; --c5:#fbd9c4; --c6:#f8d3e2; --c7:#cdeae6;
   --tileink:#3b3550;
   color-scheme:light;
 }
@@ -29,16 +29,16 @@ h1 .a{background:var(--c2)} h1 .b{background:var(--c3)}
 h1 span{color:#3b3550}
 header p{margin:6px 0 0;color:var(--sub);font-weight:700}
 .scroller{overflow-x:auto;padding:14px 14px 28px}
-.board{display:flex;gap:12px;max-width:1400px;margin:0 auto;min-width:min-content}
-.col{flex:1 1 0;min-width:128px;display:flex;flex-direction:column;gap:12px}
-.cat{height:84px;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;border-radius:16px;font-family:"Baloo 2","Nunito",sans-serif;font-weight:800;font-size:clamp(1rem,1.7vw,1.4rem);line-height:1.1;color:var(--tileink);box-shadow:0 4px 0 var(--shadow)}
-.tile{appearance:none;border:0;cursor:pointer;height:clamp(64px,11vh,104px);border-radius:14px;font-family:"Baloo 2","Nunito",sans-serif;font-weight:800;font-size:clamp(1.5rem,3vw,2.5rem);color:var(--tileink);box-shadow:0 4px 0 var(--shadow);transition:transform .18s ease,box-shadow .18s ease,opacity .3s ease,filter .3s ease}
+.board{display:flex;gap:10px;max-width:1560px;margin:0 auto;min-width:min-content}
+.col{flex:1 1 0;min-width:118px;display:flex;flex-direction:column;gap:12px}
+.cat{height:84px;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;border-radius:16px;font-family:"Baloo 2","Nunito",sans-serif;font-weight:800;font-size:clamp(.95rem,1.45vw,1.3rem);line-height:1.1;color:var(--tileink);box-shadow:0 4px 0 var(--shadow)}
+.tile{appearance:none;border:0;cursor:pointer;height:clamp(64px,11vh,104px);border-radius:14px;font-family:"Baloo 2","Nunito",sans-serif;font-weight:800;font-size:clamp(1.4rem,2.6vw,2.3rem);color:var(--tileink);box-shadow:0 4px 0 var(--shadow);transition:transform .18s ease,box-shadow .18s ease,opacity .3s ease,filter .3s ease}
 .tile:hover,.tile:focus-visible{transform:translateY(-4px) scale(1.03);box-shadow:0 8px 0 var(--shadow);outline:none}
 .tile:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .tile:active{transform:translateY(1px);box-shadow:0 2px 0 var(--shadow)}
 .tile.used{opacity:.35;filter:saturate(.6)}
 .tile.used:hover{opacity:.6}
-.k1{background:var(--c1)}.k2{background:var(--c2)}.k3{background:var(--c3)}.k4{background:var(--c4)}.k5{background:var(--c5)}.k6{background:var(--c6)}
+.k1{background:var(--c1)}.k2{background:var(--c2)}.k3{background:var(--c3)}.k4{background:var(--c4)}.k5{background:var(--c5)}.k6{background:var(--c6)}.k7{background:var(--c7)}
 .overlay{position:fixed;inset:0;background:rgba(40,32,64,.5);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
 .overlay.open{display:flex;animation:fade .2s ease}
 .modal{position:relative;background:var(--card);width:min(860px,100%);max-height:92vh;overflow:auto;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.35);animation:pop .22s ease}
@@ -82,47 +82,54 @@ u{text-decoration-thickness:3px;text-underline-offset:4px}
 /* ===== QUESTION BANK — edit here. Use \n for line breaks and **text** for underlined words. ===== */
 const POINTS = [5, 10, 20, 50, 100];
 const CATEGORIES = [
+  { name: "Descriptive Text", items: [
+    { q: "What is the main purpose of a descriptive text?", a: "To describe a particular person, place, animal, or thing." },
+    { q: "What are the two main parts of a descriptive text?", a: "Identification and Description." },
+    { q: "Read the text:\n\n“My cat is named Milo. He has white fur, blue eyes, and a long tail. He is very playful and loves sleeping on my bed.”\n\nWhat animal is being described?", a: "A cat." },
+    { q: "Read the text:\n\n“The library in my school is quite large. It has five bookshelves, three reading tables, and a comfortable sofa. The walls are painted light blue, making the room feel peaceful. Students often visit the library during breaks.”\n\nMention THREE details about the library.", a: "• It has five bookshelves.\n• It has three reading tables.\n• It has a comfortable sofa.\n• Its walls are painted light blue.\n\nAny three correct details are acceptable." },
+    { q: "Describe your favorite place in 3–4 sentences. Include at least TWO adjectives and TWO details about the place.", a: "Answers may vary. The description should include relevant details and adjectives." }
+  ]},
+  { name: "Report Text", items: [
+    { q: "What is the main purpose of a report text?", a: "To present factual information about something in general." },
+    { q: "What are the two main parts of a report text?", a: "General Classification and Description." },
+    { q: "Read the text:\n\n“Dolphins are marine mammals. They live in oceans and are known for their intelligence. They communicate using sounds and body movements.”\n\nIs this a descriptive text or a report text?", a: "Report text." },
+    { q: "Read the text:\n\n“Penguins are birds that cannot fly. They live mostly in the Southern Hemisphere, especially in Antarctica. Penguins have wings that help them swim. They eat fish, squid, and other small sea animals.”\n\nAnswer these questions:\n1. Where do penguins mostly live?\n2. What do they use their wings for?\n3. What do penguins eat?", a: "1. In the Southern Hemisphere, especially in Antarctica.\n2. To swim.\n3. Fish, squid, and other small sea animals." },
+    { q: "Explain TWO differences between a report text and a descriptive text.", a: "• Report text describes something in general, while descriptive text describes a particular person, place, animal, or thing.\n• Report text usually presents general facts, while descriptive text focuses on specific characteristics." }
+  ]},
+  { name: "Recount Text", items: [
+    { q: "What is the main purpose of a recount text?", a: "To retell past events or experiences." },
+    { q: "What are the three main parts of a recount text?", a: "Orientation, Events, and Reorientation." },
+    { q: "Which part of a recount text introduces the people, place, and time of an event?", a: "Orientation." },
+    { q: "Read the text:\n\n“Last Saturday, my family and I went to the beach. We arrived at 8 a.m. First, we played in the sand. Then, we swam in the sea and ate lunch together. Before going home, we took some pictures. It was a wonderful day.”\n\nAnswer these questions:\n1. When did the writer go to the beach?\n2. Who went to the beach?\n3. What did they do before going home?", a: "1. Last Saturday.\n2. The writer and their family.\n3. They took some pictures." },
+    { q: "Arrange these events in the correct order based on the recount text:\n\nA. We ate lunch together.\nB. We arrived at the beach.\nC. We took some pictures.\nD. We played in the sand.", a: "B – D – A – C." }
+  ]},
+  { name: "Biography", items: [
+    { q: "What is a biography?", a: "A text that tells the life story of another person." },
+    { q: "What information is usually included in the orientation of a biography?", a: "The person’s background, such as their name, birthplace, and birth date." },
+    { q: "Read the text:\n\n“R.A. Kartini was born on April 21, 1879, in Jepara, Indonesia. She was known for her efforts to improve education for women.”\n\nWhere was R.A. Kartini born?", a: "Jepara, Indonesia." },
+    { q: "Read the text:\n\n“Thomas Edison was an American inventor. He was born in 1847 in Ohio. He developed many inventions, including improvements to the electric light bulb. His work helped change modern life.”\n\nAnswer these questions:\n1. What was Thomas Edison’s nationality?\n2. When was he born?\n3. What invention is mentioned in the text?", a: "1. American.\n2. In 1847.\n3. Improvements to the electric light bulb." },
+    { q: "Mention THREE important pieces of information that are usually included in a biography.", a: "Any three of the following:\n• Date and place of birth.\n• Family or educational background.\n• Important life events.\n• Achievements or contributions.\n• Challenges or struggles.\n• Date and place of death (if applicable)." }
+  ]},
+  { name: "Simple Present", items: [
+    { q: "Complete the sentence by choosing the correct answer:\n\n“She _____ to school every day.”\n\nA. go\nB. goes\nC. going\nD. gone", a: "B. goes." },
+    { q: "Complete the sentence:\n\n“My father _____ (work) in a hospital.”", a: "Works." },
+    { q: "Change the sentence into negative:\n\n“They play football every Sunday.”", a: "They don’t play football every Sunday." },
+    { q: "Find and correct ALL mistakes:\n\n“My sister don’t likes coffee. She drink tea every morning.”", a: "“My sister doesn’t like coffee. She drinks tea every morning.”" },
+    { q: "Make TWO different WH-questions based on this sentence:\n\n“Sarah studies English at the library every afternoon.”", a: "1. What does Sarah study at the library every afternoon?\n2. Where does Sarah study English every afternoon?" }
+  ]},
   { name: "Simple Past", items: [
-    { q: "What is the past form of GO?", a: "Went." },
-    { q: "Complete the sentence:\n\n“She _____ (buy) a new dress yesterday.”", a: "Bought." },
-    { q: "Change the sentence into negative:\n\n“They watched a movie last night.”", a: "They didn’t watch a movie last night." },
-    { q: "Find and correct all mistakes:\n\n“Yesterday, my brother go to the market and buyed some fruits.”", a: "“Yesterday, my brother went to the market and bought some fruits.”" },
-    { q: "Rewrite the paragraph using Simple Past:\n\n“Last Sunday, I wake up late. I eat breakfast, take a shower, and go to the mall. I meet my friends and we watch a movie.”", a: "“Last Sunday, I woke up late. I ate breakfast, took a shower, and went to the mall. I met my friends and we watched a movie.”" }
+    { q: "What is the past form of EAT?", a: "Ate." },
+    { q: "Complete the sentence:\n\n“We _____ (visit) our grandparents yesterday.”", a: "Visited." },
+    { q: "Change the sentence into negative:\n\n“She watched television last night.”", a: "She didn’t watch television last night." },
+    { q: "Find and correct ALL mistakes:\n\n“Yesterday, I goed to the supermarket and buy some apples.”", a: "“Yesterday, I went to the supermarket and bought some apples.”" },
+    { q: "Read the paragraph and change ALL verbs into Simple Past:\n\n“Every morning, Daniel wakes up at 6 a.m. He takes a shower, eats breakfast, and goes to school. Yesterday, he _____ up late, _____ a quick shower, _____ breakfast, and _____ to school by car.”", a: "Woke – took – ate – went." }
   ]},
-  { name: "WH-Questions", items: [
-    { q: "Which WH-question word do we use to ask about a person’s identity?", a: "Who." },
-    { q: "Complete the question:\n\n“_____ did you go yesterday?”\n“I went to the library.”", a: "Where." },
-    { q: "Make a question for the underlined information:\n\n“Rina bought **a new bicycle** yesterday.”", a: "What did Rina buy yesterday?" },
-    { q: "Arrange the words into a correct question:\n\n“you / why / late / arrive / did / yesterday”", a: "Why did you arrive late yesterday?" },
-    { q: "Read the sentence below and make THREE different WH-questions.\n\n“David visited his grandmother in Jakarta last weekend because she was sick.”", a: "Possible answers:\n1. Who did David visit?\n2. Where did David visit his grandmother?\n3. Why did David visit his grandmother?" }
-  ]},
-  { name: "Zero Conditional", items: [
-    { q: "Complete the sentence by choosing the correct answer:\n\n“If you don’t water plants, they _____.”\n\nA. die\nB. died\nC. will die\nD. dying", a: "A. die." },
-    { q: "Complete the sentence:\n\n“If water reaches 100°C, it _____ (boil).”", a: "boils." },
-    { q: "Complete the sentence using the correct verb forms:\n\n“If people _____ (not/eat), they _____ (get) hungry.”", a: "don’t eat – get." },
-    { q: "Find and correct the mistakes:\n\n“If plants doesn’t get water, they dies.”", a: "“If plants don’t get water, they die.”" },
-    { q: "Find and correct ALL mistakes in these sentences:\n\n1. If water freeze, it becomes ice.\n2. Plants dies if they don’t get enough sunlight.\n3. If you mixes red and blue, you gets purple.", a: "1. If water freezes, it becomes ice.\n2. Plants die if they don’t get enough sunlight.\n3. If you mix red and blue, you get purple." }
-  ]},
-  { name: "Question Tags", items: [
-    { q: "Complete the question tag:\n\n“You are a student, _____?”", a: "Aren’t you?" },
-    { q: "Complete the question tag:\n\n“She likes chocolate, _____?”", a: "Doesn’t she?" },
-    { q: "Complete the question tag:\n\n“They didn’t go to school yesterday, _____?”", a: "Did they?" },
-    { q: "Find and correct the mistakes in these question tags:\n\n1. He can swim, doesn’t he?\n2. You aren’t tired, aren’t you?", a: "1. He can swim, can’t he?\n2. You aren’t tired, are you?" },
-    { q: "Complete both question tags:\n\n1. “The students have finished their homework, _____?”\n2. “Your brother didn’t call you, _____?”", a: "1. Haven’t they?\n2. Did he?" }
-  ]},
-  { name: "Present Perfect", items: [
-    { q: "Choose the correct auxiliary verb:\n\n“She _____ finished her homework.”\n\nA. Have\nB. Has", a: "B. Has." },
-    { q: "Complete the sentence:\n\n“I have _____ (finish) my homework.”", a: "Finished." },
-    { q: "Change the sentence into negative:\n\n“He has visited Bali.”", a: "He hasn’t visited Bali." },
-    { q: "Find and correct all mistakes:\n\n“She have never ate sushi, but she has tryed pizza.”", a: "“She has never eaten sushi, but she has tried pizza.”" },
-    { q: "Explain the difference between these two sentences:\n\n1. I visited Bali last year.\n2. I have visited Bali.\n\nWhy can’t we use “last year” in the second sentence?", a: "• The first sentence uses Simple Past because it describes a completed action at a specific time in the past.\n• The second sentence uses Present Perfect to describe an experience without specifying when it happened.\n• “Last year” refers to a finished time in the past, so it is not used with Present Perfect." }
-  ]},
-  { name: "Comparison", items: [
-    { q: "What is the comparative form of TALL?", a: "Taller." },
-    { q: "Complete the sentence:\n\n“An elephant is _____ (big) than a goat.”", a: "Bigger." },
-    { q: "Complete the sentence:\n\n“Mount Everest is _____ (high) mountain in the world.”", a: "The highest." },
-    { q: "Find and correct all mistakes:\n\n“My phone is more cheaper than yours, but your camera is the bestest.”", a: "“My phone is cheaper than yours, but your camera is the best.”" },
-    { q: "Complete the paragraph using the correct forms of the adjectives:\n\n“Tom is _____ (young) than Jack, but Jack is _____ (tall) than Tom. Among their three friends, Tom is the _____ (friendly). Jack is good at math, but Tom is even _____ (good) at it.”", a: "Younger – taller – friendliest – better." }
+  { name: "Past Continuous", items: [
+    { q: "What is the correct formula of Past Continuous Tense?", a: "Subject + was/were + verb-ing." },
+    { q: "Complete the sentence:\n\n“She _____ (sleep) at 10 p.m. last night.”", a: "Was sleeping." },
+    { q: "Choose the correct sentence:\n\nA. They was playing football.\nB. They were playing football.\nC. They are playing football.\nD. They were play football.", a: "B. They were playing football." },
+    { q: "Combine these sentences using Past Continuous and Simple Past:\n\n“I was taking a shower. The phone rang.”", a: "I was taking a shower when the phone rang." },
+    { q: "Find and correct ALL mistakes:\n\n“While I were studying, my brother was play games. Suddenly, the lights was going out.”", a: "“While I was studying, my brother was playing games. Suddenly, the lights went out.”" }
   ]}
 ];
 /* ===== END QUESTION BANK ===== */
